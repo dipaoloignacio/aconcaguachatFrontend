@@ -12,7 +12,7 @@ export const SocketContext = createContext();
 
 export const SocketProvider = ({ children }) => {
 
-    const { socket, online, conectarSocket, disconectSocket } = useSocket('http://localhost:3000/');
+    const { socket, online, conectarSocket, disconectSocket } = useSocket('http://localhost:8080/');
     const { auth } = useContext(AuthContext)
     const { dispatch } = useContext(ChatContext)
 
