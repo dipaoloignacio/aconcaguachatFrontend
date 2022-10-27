@@ -9,7 +9,6 @@ export const InboxPeople = () => {
             <SerchBox />
 
             <SideBar />
-            
 
         </div>
     )

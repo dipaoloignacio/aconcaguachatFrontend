@@ -6,7 +6,6 @@ import '../css/login-register.css';
 
 function RegisterPage() {
   const { register } = useContext(AuthContext);
-  const [exito, setExito] = useState(false)
   const navigate = useNavigate()
   const [form, setForm] = useState({
     nombre: '',
@@ -35,16 +34,19 @@ function RegisterPage() {
         text: ok.msg,
       });
     } else {
-      setExito(true)
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Registrado con exito',
+        showConfirmButton: false,
+        timer: 1500
+      })
       setForm({
-          nombre: '',
-          email: '',
-          password: ''
-        })
-        
-      setTimeout(() => {
-        setExito(false)
-      }, 3000)
+        nombre: '',
+        email: '',
+        password: ''
+      })
+      navigate('/auth/login');
     }
   }
 
@@ -116,9 +118,9 @@ function RegisterPage() {
                   disabled={!todoOk()}
                 >
                   Crear cuenta
+
                 </button>
               </div>
-
             </form>
           </div>
         </div>

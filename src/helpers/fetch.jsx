@@ -20,6 +20,7 @@ export const fetchSinToken = async (endpoint, data, method = 'GET') => {
         return await resp.json();
     }
 }
+
 export const fetchConToken = async (endpoint, data, method = 'GET') => {
 
     const url = `${baseUrl}/${endpoint}`
@@ -42,6 +43,7 @@ export const fetchConToken = async (endpoint, data, method = 'GET') => {
             body: JSON.stringify(data)
         })
 
+        console.log(resp.josn)
         return await resp.json();
     }
 }

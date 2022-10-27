@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { ChatContext } from '../context/chat/ChatContext';
 import { fetchConToken } from '../helpers/fetch';
 import { scrollToBottomm } from '../helpers/scrollToBottom';
@@ -16,6 +16,7 @@ export const SideBarChatItem = ({ user }) => {
         //cargar mensajes del chat
         const resp = await fetchConToken(`message/${user.uid}`);
 
+        console.log(resp)
         dispatch({
             type: types.cargarMsg,
             payload: resp.msg
@@ -33,7 +34,7 @@ export const SideBarChatItem = ({ user }) => {
             {/* active_chat */}
             <div className="chat_people">
                 <div className="chat_img">
-                    <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil" />
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSo38tCnX_HjKgFyft_g7SeKWrA9IqaS3dgnNJVmwe77ceNSy04aJjtk-ik3xo0VWjXG7Y&usqp=CAU" alt="sunil" />
                 </div>
                 <div className="chat_ib">
                     <h5>{user.nombre}</h5>
