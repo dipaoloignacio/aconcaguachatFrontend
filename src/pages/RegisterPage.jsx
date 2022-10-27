@@ -1,12 +1,13 @@
 import React, { useContext, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../auth/AuthContext'
 import Swal from 'sweetalert2'
 import '../css/login-register.css';
 
 function RegisterPage() {
   const { register } = useContext(AuthContext);
-
+  const [exito, setExito] = useState(false)
+  const navigate = useNavigate()
   const [form, setForm] = useState({
     nombre: '',
     email: '',
@@ -28,12 +29,22 @@ function RegisterPage() {
     const ok = await register(email, password, nombre);
 
     if (!ok.ok) {
-
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
         text: ok.msg,
       });
+    } else {
+      setExito(true)
+      setForm({
+          nombre: '',
+          email: '',
+          password: ''
+        })
+        
+      setTimeout(() => {
+        setExito(false)
+      }, 3000)
     }
   }
 
