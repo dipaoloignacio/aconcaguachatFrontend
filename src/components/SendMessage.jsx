@@ -25,6 +25,11 @@ export const SendMessage = () => {
             to: chatState.chatActive,
             message
         });
+        socket.emit('send-notification', {
+            from: auth.uid,
+            to: chatState.chatActive,
+            msgSinLeer: true
+        });
     }
 
     return (

@@ -5,7 +5,7 @@ import { SideBarChatItem } from './SideBarChatItem'
 
 export const SideBar = () => {
 
-    const {auth} = useContext(AuthContext)
+    const { auth } = useContext(AuthContext)
     const { chatState } = useContext(ChatContext)
 
     return (
@@ -16,7 +16,8 @@ export const SideBar = () => {
                     return (
                         <SideBarChatItem
                             key={user.uid}
-                            user={user} />
+                            user={user}
+                        />
                     )
                 })
             }

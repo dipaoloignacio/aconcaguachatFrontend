@@ -43,7 +43,6 @@ export const fetchConToken = async (endpoint, data, method = 'GET') => {
             body: JSON.stringify(data)
         })
 
-        console.log(resp.josn)
         return await resp.json();
     }
 }

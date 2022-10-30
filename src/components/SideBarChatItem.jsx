@@ -1,11 +1,46 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { AuthContext } from '../auth/AuthContext';
 import { ChatContext } from '../context/chat/ChatContext';
+import { SocketContext } from '../context/SocketContext';
 import { fetchConToken } from '../helpers/fetch';
 import { scrollToBottomm } from '../helpers/scrollToBottom';
 import { types } from '../types/types';
 
 export const SideBarChatItem = ({ user }) => {
     const { dispatch, chatState } = useContext(ChatContext);
+    const { auth } = useContext(AuthContext)
+    const { socket } = useContext(SocketContext)
+    let notifi = localStorage.getItem('notification');
+    const [noti, setNoti] = useState({
+        notify: false,
+        to: '',
+        from: '',
+    })
+
+    useEffect(() => {
+        socket?.on('getNotification', (payload) => {
+            if (payload.to === auth.uid &&
+                payload.from === user.uid) {
+
+                setNoti({
+                    notify: true,
+                    to: payload.to,
+                    from: payload.from,
+                })
+                localStorage.setItem('notification', true)
+            }
+
+            if (chatState.chatActive === payload.from) {
+                setNoti({
+                    notify: false,
+                    to: '',
+                    from: ''
+                })
+                localStorage.removeItem('notification')
+            }
+        })
+    }, [socket, chatState.chatActive])
+
 
     const onClick = async () => {
         dispatch({
@@ -13,10 +48,13 @@ export const SideBarChatItem = ({ user }) => {
             payload: user.uid
         })
 
+        if (noti.notify) {
+            localStorage.removeItem('notification')
+        }
+
         //cargar mensajes del chat
         const resp = await fetchConToken(`message/${user.uid}`);
 
-        console.log(resp)
         dispatch({
             type: types.cargarMsg,
             payload: resp.msg
@@ -44,6 +82,15 @@ export const SideBarChatItem = ({ user }) => {
                             : <span className="text-danger">Offline</span>
                     }
                 </div>
+
+                {
+
+                    notifi &&
+                        noti.to === auth.uid &&
+                        noti.from === user.uid &&
+                        chatState.chatActive !== noti.from ? <div className={'float-end text-light bg-danger p-1'}>nuevo mensaje</div> : ''
+                }
+
             </div>
         </div>
     )

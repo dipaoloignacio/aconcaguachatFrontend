@@ -9,7 +9,7 @@ function LoginPage() {
   const { login } = useContext(AuthContext)
 
   const [form, setForm] = useState({
-    email: 'test1@gmail.com',
+    email: '',
     password: '',
     rememberme: false,
   })
@@ -91,7 +91,6 @@ function LoginPage() {
                 />
                 <span className="focus-input100"></span>
               </div>
-
 
               <div className="wrap-input100 validate-input mb-3">
                 <input

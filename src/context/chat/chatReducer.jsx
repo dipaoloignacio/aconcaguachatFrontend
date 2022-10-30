@@ -31,7 +31,12 @@ export const chatReducer = (state, action) => {
                 uid: '',
                 chatActive: null,
                 users: [],
-                msg: []
+                msg: [],
+                notify: {
+                    notify: false,
+                    to: '',
+                    from: ''
+                }
             }
 
         case (types.cargarMsg):
@@ -39,6 +44,7 @@ export const chatReducer = (state, action) => {
                 ...state,
                 msg: [...action.payload]
             }
+
         default:
             return state;
     }

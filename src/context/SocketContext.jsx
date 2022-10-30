@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useSocket } from '../hooks/useSocket'
 
 import { createContext } from 'react';
@@ -43,7 +43,7 @@ export const SocketProvider = ({ children }) => {
             dispatch({
                 type: types.nuevoMensaje,
                 payload: message
-            }); 
+            });
 
             scrollToBottomAnimated('mensajes');
         })
