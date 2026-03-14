@@ -12,7 +12,7 @@ export const SocketContext = createContext();
 
 export const SocketProvider = ({ children }) => {
 
-    const { socket, online, conectarSocket, disconectSocket } = useSocket('http://localhost:8080/');
+    const { socket, online, conectarSocket, disconectSocket } = useSocket(process.env.REACT_APP_API_URL.replace('/api', ''));
     const { auth } = useContext(AuthContext)
     const { dispatch } = useContext(ChatContext)
 
