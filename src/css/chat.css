@@ -236,11 +236,7 @@ textarea {
 }
 
 @media (max-width: 768px) {
-
-
-  /* El chat ocupa toda la pantalla */
   .mesgs {
-    height: 90vh;
+    height: 90dvh; /* se adapta a la barra del navegador */
   }
-
 }
