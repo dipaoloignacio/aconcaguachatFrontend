@@ -234,3 +234,13 @@ textarea {
     width: 60%;
     text-align: center;
 }
+
+@media (max-width: 768px) {
+
+
+  /* El chat ocupa toda la pantalla */
+  .mesgs {
+    height: 90vh;
+  }
+
+}
