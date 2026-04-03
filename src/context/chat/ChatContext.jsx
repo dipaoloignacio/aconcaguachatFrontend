@@ -1,26 +1,27 @@
-import React, { useContext, useEffect, useReducer } from 'react';
-import { createContext } from 'react';
-import { chatReducer } from './chatReducer';
+import { useReducer } from "react";
+import { createContext } from "react";
+import { chatReducer } from "./chatReducer";
 
 export const ChatContext = createContext();
 
 const initialState = {
-    uid: '',
-    chatActive: null,
-    users: [],
-    msg: []
-}
+  uid: "",
+  chatActive: null,
+  users: [],
+  msg: [],
+};
 
 export const ChatProvider = ({ children }) => {
+  const [chatState, dispatch] = useReducer(chatReducer, initialState);
 
-    const [chatState, dispatch] = useReducer(chatReducer, initialState);
-
-    return (
-        <ChatContext.Provider value={{
-            chatState,
-            dispatch
-        }}>
-            {children}
-        </ChatContext.Provider>
-    )
-}
+  return (
+    <ChatContext.Provider
+      value={{
+        chatState,
+        dispatch,
+      }}
+    >
+      {children}
+    </ChatContext.Provider>
+  );
+};
